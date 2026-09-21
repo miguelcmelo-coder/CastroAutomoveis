@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Clone Mercado Livre - Estrutura e CSS Interno</title>
+
+    <style>
+        /* 1. CONFIGURAÇÕES GERAIS */
+        body {
+            background-color: #000000;
+            /* Amarelo característico */
+            font-family: Arial, sans-serif;
+            margin: 0;
+            /* Tira as margens brancas padrão do navegador */
+        }
+
+        /* 2. CABEÇALHO E ÁREA DE BUSCA */
+        header {
+            padding: 20px;
+            text-align: center;
+        }
+
+        /* --- NOVAS REGRAS: ALINHAMENTO DO TOPO --- */
+        .container-topo {
+            display: flex;
+            align-items: center;
+            /* Alinha tudo ao centro verticalmente */
+            justify-content: center;
+            /* Centraliza o bloco na página */
+            gap: 15px;
+            /* Espaço entre a logo e a barra */
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            width: 150px;
+            height: auto;
+        }
+
+        .barra-busca {
+            width: 600px;
+            padding: 12px 15px;
+            font-size: 16px;
+            border: 1px solid white;
+            border-radius: 2px 0 0 2px;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+            outline: none;
+        }
+
+        .btn-busca {
+            padding: 12px 15px;
+            font-size: 16px;
+            border: none;
+            background-color: white;
+            border-radius: 0 2px 2px 0;
+            cursor: pointer;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+            margin-left: -15px;
+            /* aproxima o botão da barra para dar um efeito contínuo */
+        }
+
+        /* ------------------------------------------ */
+
+        .slide {
+            width: 1100px;
+            margin: 30px auto;
+            text-align: center;
+            position: relative;
+        }
+
+        /* Imagem do banner */
+        .slide img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        /* Botões do banner */
+        .slide button {
+            padding: 10px 15px;
+            cursor: pointer;
+            font-size: 20px;
+        }
+
+        /* 3. MENU DE NAVEGAÇÃO */
+        nav {
+            margin-top: 15px;
+        }
+
+        /* Estilizando diretamente as tags de link (a) que estão dentro do nav */
+        nav a {
+            color: #d4d4d4;
+            text-decoration: none;
+            margin-right: 15px;
+            font-size: 14px;
+        }
+
+        /* Efeito visual ao passar o mouse */
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        /* Linha divisória sutil */
+        hr {
+            border-color: #a00000;
+            border-style: solid;
+        }
+
+        /* 4. CONTEÚDO PRINCIPAL (BANNER) */
+        main {
+            text-align: center;
+            padding: 40px;
+        }
+
+        main h1,
+        main h3,
+        main h4 {
+            color: #b30000;
+            margin-bottom: 0;
+            text-transform: uppercase;
+        }
+
+        .controle-card {
+            margin-bottom: 10px;
+        }
+
+        .controles-card {
+            margin-bottom: 10px;
+        }
+
+        .controles-card button {
+            cursor: pointer;
+            font-size: 16px;
+            margin: 0 4px;
+            padding: 5px 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: white;
+        }
+
+        .controles-card button:hover {
+            background-color: #eeeeee;
+        }
+
+        .selo-desconto {
+            background-color: white;
+            color: #0056b3;
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+
+        /* 5. SEÇÃO DE CARDS */
+        .secao-cards {
+            background-color: #000000;
+            /* Fundo cinza claro para destacar os cartões */
+            padding: 40px;
+            text-align: center;
+        }
+
+        .card {
+            background-color: white;
+            width: 220px;
+            display: inline-block;
+            /* Permite que os cards fiquem lado a lado */
+            padding: 20px;
+            margin: 10px;
+            border-radius: 5px;
+            text-align: center;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+            /* Sombra leve para dar profundidade */
+        }
+
+        .card h4 {
+            margin-top: 0;
+        }
+
+        .card p {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .card a {
+            color: #3483fa;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .card a:hover {
+            color: #2968c8;
+            text-decoration: underline;
+        }
+
+        .foto-banner {
+            width: 1100px;
+            height: auto;
+            margin-right: 30px;
+            border-radius: 10px;
+        }
+
+        .foto-card {
+            width: 200px;
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        .secao-categorias {
+            max-width: 1100px;
+            margin: 40px auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 1px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .topo-categorias {
+            display: flex;
+            align-items: baseline;
+            margin-bottom: 20px;
+        }
+
+        .topo-categorias h2 {
+            margin: 0;
+            color: #333;
+            margin-right: 15px;
+        }
+
+        .tabela-categorias {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 50px;
+        }
+
+        .celula-categoria {
+            background-color: white;
+            border: 1px solid #e3e3e3;
+            border-radius: 4px;
+            padding: 0;
+            width: 25%;
+            vertical-align: middle;
+        }
+
+        .fundo-imagem-categoria {
+            background-color: #f5f5f5;
+            width: 80px;
+            min-height: 80px;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 4px 0 0 4px;
+            vertical-align: middle;
+        }
+
+        .foto-categoria {
+            max-width: 50px;
+            max-height: 50px;
+        }
+
+        .nome-categoria {
+            display: inline-block;
+            width: calc(100% - 90px);
+            text-align: center;
+            font-size: 14px;
+            color: #333;
+            font-weight: bold;
+            padding: 10px;
+            box-sizing: border-box;
+            vertical-align: middle;
+        }
+
+        .rodape {
+            background-color: white;
+            margin-top: 40px;
+            border-top: 1px solid #e3e3e3;
+        }
+
+        .rodape-beneficios {
+            display: flex;
+            justify-content: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .beneficio-item {
+            width: 33%;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .beneficio-item h4 {
+            color: #333;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .beneficio-item p {
+            color: #999;
+            font-size: 14px;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+
+        .beneficio-item a {
+            color: #3483fa;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .texto-legal {
+            max-width: 1200px;
+            margin: 0 auto;
+            font-size: 12px;
+        }
+
+        .texto-legal p {
+            margin: 2px 0;
+        }
+
+        .rodape-mais-info {
+            text-align: center;
+            border-top: 1px solid #e3e3e3;
+            margin-top: -16px;
+        }
+
+        .btn-mais-info {
+            background-color: white;
+            border: 1px solid #e3e3e3;
+            padding: 10px 20px;
+            border-radius: 4px;
+            color: #333;
+            cursor: pointer;
+        }
+
+        .rodape-legal {
+            background-color: #f5f5f5;
+            padding: 20px 0;
+            border-top: 1px solid #e3e3e3;
+            margin-top: 20px;
+        }
+
+        .links-legais {
+            max-width: 1200px;
+            margin: 0 auto 10px auto;
+        }
+
+        .links-legais a {
+            color: #999;
+            text-decoration: none;
+            font-size: 12px;
+            margin-right: 15px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- 1. CABEÇALHO -->
+    <header>
+        <div class="container-topo">
+            <img src="logoCastro1.jpeg" alt="Logo" class="logo">
+            <input type="text" class="barra-busca" placeholder="Buscar produtos, marcas e muito mais...">
+            <button class="btn-busca">🔍</button>
+        </div>
+
+        <!-- 2. MENU DE NAVEGAÇÃO -->
+        <nav>
+            <a href="#">Carros</a>
+            <a href="#">Ofertas</a>
+            <a href="#">Histórico</a>
+            <a href="#">Produtos</a>
+        </nav>
+    </header>
+
+    <hr>
+
+    <!-- 3. DESTAQUE -->
+    <main class="banner-destaque">
+        <img src="bannerCastro.jpeg" alt="Banner principal" class="foto-banner">
+        <div>
+            <h1>OFERTAS DISPONÍVEIS</h1>
+            <h3>Confira já:</h3>
+            <h4>O melhor para você está aqui</h4>
+        </div>
+    </main>
+
+    <section class="slide">
+        <!-- Imagem que aparece na tela -->
+        <img id="imagem-slide" src="carro1.jpeg" alt="Banner promocional">
+
+        <!-- Botão para voltar -->
+        <button onclick="voltarImagem()">❮</button>
+
+        <!-- Botão para avançar -->
+        <button onclick="avancarImagem()">❯</button>
+    </section>
+
+    <!-- 4. SEÇÃO DE CARDS -->
+    <section class="secao-cards">
+
+        <article class="card">
+            <img id="foto-card-1" src="preco.jpeg" class="foto-card">
+
+            <div class="controles-card">
+                <button type="button" onclick="voltarCard1()">⬅️</button>
+                <button type="button" onclick="avancarCard1()">➡️</button>
+            </div>
+            <h4>Confira já</h4>
+            <p>Aproveite ofertas para comprar tudo que quiser.</p>
+            <a href="#">Tenho interesse</a>
+        </article>
+
+        <article class="card">
+             <img id="foto-card-2" src="preco.jpeg" class="foto-card">
+
+            <div class="controles-card">
+                <button type="button" onclick="voltarCard2()">⬅️</button>
+                <button type="button" onclick="avancarCard2()">➡️</button>
+            </div>
+            <h4>Confira já</h4>
+            <p>Confira os custos e prazos de entrega.</p>
+            <a href="#">Tenho interesse</a>
+        </article>
+
+        <article class="card">
+            <img id="foto-card-3" src="preco.jpeg" class="foto-card">
+
+            <div class="controles-card">
+                <button type="button" onclick="voltarCard3()">⬅️</button>
+                <button type="button" onclick="avancarCard3()">➡️</button>
+            </div>
+            <h4>Confira já</h4>
+            <p>Pague suas compras com rapidez e segurança.</p>
+            <a href="#">Tenho interesse</a>
+        </article>
+
+        <article class="card">
+            <img id="foto-card-4" src="preco.jpeg" class="foto-card">
+
+            <div class="controles-card">
+                <button type="button" onclick="voltarCard4()">⬅️</button>
+                <button type="button" onclick="avancarCard4()">➡️</button>
+            </div>
+            <h4>Confira já</h4>
+            <p>Confira produtos com preços baixos.</p>
+            <a href="#">Tenho interesse</a>
+        </article>
+
+    </section>
+    <!-- O rodapé agora fica dentro do body -->
+    <footer class="rodape">
+        <section class="rodape-beneficios">
+            <article class="beneficio-item">
+                <img src="" alt="icone cartão" class="icone-beneficio">
+                <h4>Escolha como pagar</h4>
+                <p>Com Mercado Pago, você paga com cartão, boleto ou Pix. Você também pode pagar em até 12x sem cartão
+                    com a Linha de Crédito.</p>
+                <a href="#">Como pagar com Mercado Pago</a>
+            </article>
+
+            <article class="beneficio-item">
+                <img src="" alt="icone cartão" class="icone-beneficio">
+                <h4>Escolha como pagar</h4>
+                <p>Com Mercado Pago, você paga com cartão, boleto ou Pix. Você também pode pagar em até 12x sem cartão
+                    com a Linha de Crédito.</p>
+                <a href="#">Como pagar com Mercado Pago</a>
+            </article>
+
+            <article class="beneficio-item">
+                <img src="" alt="icone cartão" class="icone-beneficio">
+                <h4>Escolha como pagar</h4>
+                <p>Com Mercado Pago, você paga com cartão, boleto ou Pix. Você também pode pagar em até 12x sem cartão
+                    com a Linha de Crédito.</p>
+                <a href="#">Como pagar com Mercado Pago</a>
+            </article>
+        </section>
+
+        <div class="rodape-mais-info">
+            <button class="btn-mais-info">Mais Informações</button>
+        </div>
+
+        <section class="rodape-legal">
+            <div class="links-legais">
+                <a href="#">Política de Privacidade</a>
+                <a href="#">Termos e Condições</a>
+                <a href="#">Promoções</a>
+                <a href="#">Como Cuidamos da sua Privacidade</a>
+                <a href="#">Contato</a>
+            </div>
+            <div class="texto-legal">
+                <p>Copyright © 1999-2026 Mercado Livre Brasil Ltda.</p>
+                <p>CNPJ n.º 03.007.331/0001-41 / Av. das Nações Unidas, nº 3.003, Bonfim, Osasco/SP - CEP 06233-903 -
+                    empresa do grupo Mercado Livre.</p>
+            </div>
+        </section>
+    </footer>
+
+
+    <script>
+
+        let imagens = [
+            "mclaren.jpeg",
+            "laferrari.jpeg",
+            "porche.jpeg",
+            "koenigsegg.jpeg"
+        ];
+
+        let imagemAtual = 0;
+
+        function avancarImagem() {
+            imagemAtual = imagemAtual + 1;
+
+            if (imagemAtual >= imagens.length) {
+                imagemAtual = 0;
+            }
+
+            document.getElementById("imagem-slide").src = imagens[imagemAtual];
+        }
+
+        function voltarImagem() {
+            imagemAtual = imagemAtual - 1;
+
+            if (imagemAtual < 0) {
+                imagemAtual = imagens.length - 1;
+            }
+
+            document.getElementById("imagem-slide").src = imagens[imagemAtual];
+        }
+
+        setInterval(avancarImagem, 3000);
+
+        let imagensCard1 = [
+           "card4.jpeg",
+            "card2.jpeg",
+            "card3.jpeg",
+            "card6.jpeg"
+        ];
+
+        let card1Atual = 0;
+
+        function avancarCard1() {
+            card1Atual = card1Atual + 1;
+
+            if (card1Atual >= imagensCard1.length) {
+                card1Atual = 0;
+            }
+
+            document.getElementById("foto-card-1").src =
+                imagensCard1[card1Atual];
+        }
+
+        function voltarCard1() {
+            card1Atual = card1Atual - 1;
+
+            if (card1Atual < 0) {
+                card1Atual = imagensCard1.length - 1;
+            }
+
+            document.getElementById("foto-card-1").src =
+                imagensCard1[card1Atual];
+        }
+
+
+
+        let imagensCard2 = [
+            "card4.jpeg",
+            "card2.jpeg",
+            "card3.jpeg",
+            "card6.jpeg"
+        ];
+
+        let card2Atual = 0;
+
+        function avancarCard2() {
+            card2Atual = card2Atual + 1;
+
+            if (card2Atual >= imagensCard2.length) {
+                card2Atual = 0;
+            }
+
+            document.getElementById("foto-card-2").src =
+                imagensCard2[card2Atual];
+        }
+
+        function voltarCard2() {
+            card2Atual = card2Atual - 1;
+
+            if (card2Atual < 0) {
+                card2Atual = imagensCard2.length - 1;
+            }
+
+            document.getElementById("foto-card-2").src =
+                imagensCard2[card2Atual];
+        }
+
+
+        let imagensCard3 = [
+            "card4.jpeg",
+            "card2.jpeg",
+            "card3.jpeg",
+            "card6.jpeg"
+        ];
+
+        let card3Atual = 0;
+
+        function avancarCard3() {
+            card3Atual = card3Atual + 1;
+
+            if (card3Atual >= imagensCard3.length) {
+                card3Atual = 0;
+            }
+
+            document.getElementById("foto-card-3").src =
+                imagensCard3[card3Atual];
+        }
+
+        function voltarCard3() {
+            card3Atual = card3Atual - 1;
+
+            if (card3Atual < 0) {
+                card3Atual = imagensCard3.length - 1;
+            }
+
+            document.getElementById("foto-card-3").src =
+                imagensCard3[card3Atual];
+        }
+
+
+
+        let imagensCard4 = [
+            "card4.jpeg",
+            "card2.jpeg",
+            "card3.jpeg",
+            "card6.jpeg"
+        ];
+
+        let card4Atual = 0;
+
+        function avancarCard4() {
+            card4Atual = card4Atual + 1;
+
+            if (card4Atual >= imagensCard4.length) {
+                card4Atual = 0;
+            }
+
+            document.getElementById("foto-card-4").src =
+                imagensCard4[card4Atual];
+        }
+
+        function voltarCard4() {
+            card4Atual = card4Atual - 1;
+
+            if (card4Atual < 0) {
+                card4Atual = imagensCard4.length - 1;
+            }
+
+            document.getElementById("foto-card-4").src =
+                imagensCard4[card4Atual];
+        }
+
+    </script>
+
+
+
+    </script>
+
+</body>
+
+</html>
